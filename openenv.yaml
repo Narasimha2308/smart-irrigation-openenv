@@ -1,0 +1,45 @@
+name: smart-irrigation-openenv
+version: "1.1.0"
+description: A real-world irrigation optimization environment where an agent decides daily watering under varying weather, crop stage, and water budget constraints.
+
+endpoints:
+  reset: /reset
+  step: /step
+  state: /state
+  evaluate: /evaluate
+
+tasks:
+  - id: easy
+    description: Maintain healthy soil moisture in stable no-rain conditions.
+    difficulty: easy
+  - id: medium
+    description: Handle random rain while maintaining irrigation efficiency.
+    difficulty: medium
+  - id: hard
+    description: Optimize crop health with limited water and changing crop stages.
+    difficulty: hard
+
+action_space:
+  type: object
+  fields:
+    water_amount:
+      type: float
+      min: 0
+      max: 10
+
+observation_space:
+  type: object
+  fields:
+    day: int
+    soil_moisture: float
+    rain_forecast: int
+    crop_stage: string
+    water_available: float
+    crop_health: float
+    done: bool
+    difficulty: string
+
+evaluation:
+  output_range:
+    min: 0.0
+    max: 1.0
